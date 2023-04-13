@@ -9,7 +9,7 @@ This dashboard is intended for Star Wars enthusiasts and data analysts who want 
 The data used to create this dashboard was sourced from kaggle and data.world
 
 ### Data processing
-The raw data was processed and cleaned and then the data was then loaded into Snowflake.
+The raw data was processed and cleaned and then the data was loaded into Snowflake.
 
 
 
