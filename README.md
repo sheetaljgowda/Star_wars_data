@@ -1,4 +1,4 @@
-# May the 4th be with you: Exploring the Star Wars Universe with Data
+# May the 4th be with you: Exploring the Star Wars Universe with Snowsight
 
 ### Overview
 This project contains the files used to create the Snowsight dashboard for exploring data related to the Star Wars universe. 
