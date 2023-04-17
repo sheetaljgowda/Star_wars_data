@@ -219,6 +219,7 @@ GROUP BY name
 order by avg_height desc;
 
 --Query 11:This query calculates the number of "very favorable" ratings for each Star Wars character based on responses from a survey.
+-- Represented as bar chart in dashboard
 SELECT 
   character_name, 
   SUM(CASE WHEN rating = 'Very favorably' THEN 1 ELSE 0 END) AS very_favorable
