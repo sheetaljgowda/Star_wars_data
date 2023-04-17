@@ -10,10 +10,10 @@ CREATE SCHEMA SW_DATA;
 -- Create an internal stage to upload the csv files
 Create or replace stage my_stage;
 
---download snowsql from the link provided in the Readme file
+/*You can download SnowSQL from the link provided in the Readme file and 
+then connect to your Snowflake account by running the following command in the terminal*/
 
---connect to your snowflake account by running this command in the terminal
-snowsql -a <account_name> -u <username> 
+snowsql -a <account_name> -u <username>
 
 
 -- Upload the csv into stage by running the below command in SnowSQL(CLI)
