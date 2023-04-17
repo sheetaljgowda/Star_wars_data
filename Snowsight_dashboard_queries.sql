@@ -22,6 +22,12 @@ PUT file:///<path_to_local_file>/star_wars_movie_ratings.csv @my_stage;
 PUT file:///<path_to_local_file>/star_wars_survey.csv @my_stage;
 --Note: You would need to replace <path_to_local_file> with the actual path to the star_wars_characters.csv file on your local machine.
 
+--Run the below commands in SnowSQL
+
+use database STAR_WARS_DB;
+use schema SW_DATA;
+
+
 --This command is used to list the files in the internal stage named my_stage.
 list @my_stage;
 
