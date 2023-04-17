@@ -132,54 +132,48 @@ SELECT * FROM STAR_WARS_DB.SW_DATA.CHARACTERS;
 --- These queries were used to build a dashboard that displays data related to Star Wars movies and characters 
 
 --- Query 1: Returns the total count of characters in the characters table.
+---Represented as First scorecard in dashboard
 select count(name) from characters;
 
 --- Query 2: Calculates the average global box office revenue for all Star Wars movies.
+---Represented as second scorecard in dashboard
 select round(avg(globalboxoffice_revenue), 2) as Avg_revenue from movie_rating;
+--after adding filter
+select round(avg(globalboxoffice_revenue), 2) as Avg_revenue
+from movie_rating where title = :title;
 
 --- Query 3: Calculates the average runtime for all Star Wars movies.
+--- Represented as third scorecard in dashboard
 select round(avg(runtime),2) as avg_runtime  from movie_rating;
+--after filter
+select round(avg(runtime),2) as avg_runtime  from movie_rating where title=:title;
 
---- Query 4 :Returns the title, IMDB rating, and Rotten Tomatoes score for each of the Star Wars movie,
-select title as movie, imdbrating as imdb_rating,rottentomatoscore as rotten_tomato_score from movie_rating 
+--Query 4 : This query returns the release year and title of all Star Wars movies
+--represented as table in dashboard
+select year,TITLE as Movie from movie_rating order by year;
+
+
+--- Query 5 :Returns the year, IMDB rating, Rotten Tomatoes score and metascore for each of the Star Wars movie,
+--- Represented as line chart in dashboard
+select year,
+(imdbrating*10) as imdbrating,
+(rottentomatoscore*100) as rottentomatoscore, 
+metascore as metascore 
+from movie_rating order by year;
+
+----Query 6: Returns movie title , globalboxoffice_revenue_in_millions and awards won by each movie
+--- Represented as bar chart in dashboard
+select title as movie, globalboxoffice_revenue as globalboxoffice_revenue_in_millions,AWARDS from movie_rating 
+order by globalboxoffice_revenue,AWARDS;
+
+--after filter
+select title as movie, globalboxoffice_revenue as globalboxoffice_revenue_in_millions,AWARDS from movie_rating 
 where title=:title
-order by imdbrating ,rottentomatoscore;
+order by globalboxoffice_revenue,AWARDS;
 
---Query 5:This query calculates the number of "very favorable" ratings for each Star Wars character based on responses from a survey.
-SELECT 
-  character_name, 
-  SUM(CASE WHEN rating = 'Very favorably' THEN 1 ELSE 0 END) AS very_favorable
-FROM (
-  SELECT 'Luke Skywalker' AS character_name, RATE_LUKE_SKYWALKER AS rating FROM star_wars_survey
-  UNION ALL SELECT 'Han Solo', RATE_HAN_SOLO FROM star_wars_survey
-  UNION ALL SELECT 'Princess Leia', RATE_PRINCESS_LEIA_ORGANA FROM star_wars_survey
-  UNION ALL SELECT 'Anakin Skywalker', RATE_ANAKIN_SKYWALKER FROM star_wars_survey
-  UNION ALL SELECT 'Obi Wan', RATE_OBI_WAN_KENOBI FROM star_wars_survey
-  UNION ALL SELECT 'Darth Vader', RATE_DARTH_VADER FROM star_wars_survey
-  UNION ALL SELECT 'C3PO', RATE_C_3P0 FROM star_wars_survey
-  UNION ALL SELECT 'R2_D2', RATE_R2_D2 FROM star_wars_survey
-  UNION ALL SELECT 'Yoda', RATE_YODA FROM star_wars_survey
-  UNION ALL SELECT 'Jar Jar Binks', RATE_JAR_JAR_BINKS FROM star_wars_survey
-) AS character_ratings
-WHERE rating IS NOT NULL
-GROUP BY character_name;
 
---Query 6 : This query returns the release year and title of all Star Wars movies
-select year,TITLE from movie_rating order by year;
-
----Query 7 : This query returns the release year, IMDb rating, Rotten Tomatoes score, and Metacritic score for all Star Wars movies.
-select year,imdbrating, rottentomatoscore, metascore from movie_rating order by year;
-
---Query 8 :  This query returns the average mass and height for each Star Wars character in the characters table
-SELECT name, ROUND(AVG(mass),2) AS avg_mass,round(AVG(HEIGHT),2) AS avg_height
-FROM characters 
-GROUP BY name 
-order by avg_height desc;
-
---Query 9 : This query returns the name, homeworld, and species for all Star Wars characters in the 
-select name,homeworld,species from characters;
-
----Query 10 : This query calculates the average Metascore and total number of movies directed by each director in the movie_rating table
+---Query 7 : This query calculates the average Metascore and total number of movies directed by each director in the movie_rating table
+--- Represented as a heatgrid on dashboard
 WITH CTE AS (
     SELECT
         DIRECTOR,
@@ -198,10 +192,58 @@ SELECT
 FROM
     MOVIE_RATING M
     LEFT JOIN CTE C ON M.DIRECTOR = C.DIRECTOR
+    
+    
 
----Query 11 : This query counts the number of characters belonging to a specific species and living on a specific homeworld
-select count(name),homeworld,species from characters  and species<>'NA' and homeworld<>'NA'
+--Query 8 : This query returns the name, homeworld, and species for all Star Wars characters in the
+--Represented as a table in dashboard
+select name,homeworld,species from characters;
+--after filter
+select name,homeworld,species from characters  where species=:species and homeworld=:homeworld
+
+---Query 9 : This query counts the number of characters belonging to a specific species and living on a specific homeworld
+select count(name),homeworld,species from characters  
+and species<>'NA' and homeworld<>'NA'
 group by homeworld,species;
+
+--after filter
+select count(name),homeworld,species from characters where species=:species and homeworld=:homeworld
+and species<>'NA' and homeworld<>'NA'
+group by homeworld,species;
+
+--Query 10 :  This query returns the average mass and average height for each Star Wars character in the characters table
+--Represented as scatter plot in dashboard
+SELECT name, ROUND(AVG(mass),2) AS avg_mass,round(AVG(HEIGHT),2) AS avg_height
+FROM characters 
+GROUP BY name 
+order by avg_height desc;
+
+--Query 11:This query calculates the number of "very favorable" ratings for each Star Wars character based on responses from a survey.
+SELECT 
+  character_name, 
+  SUM(CASE WHEN rating = 'Very favorably' THEN 1 ELSE 0 END) AS very_favorable
+FROM (
+  SELECT 'Luke Skywalker' AS character_name, RATE_LUKE_SKYWALKER AS rating FROM star_wars_survey
+  UNION ALL SELECT 'Han Solo', RATE_HAN_SOLO FROM star_wars_survey
+  UNION ALL SELECT 'Princess Leia', RATE_PRINCESS_LEIA_ORGANA FROM star_wars_survey
+  UNION ALL SELECT 'Anakin Skywalker', RATE_ANAKIN_SKYWALKER FROM star_wars_survey
+  UNION ALL SELECT 'Obi Wan', RATE_OBI_WAN_KENOBI FROM star_wars_survey
+  UNION ALL SELECT 'Darth Vader', RATE_DARTH_VADER FROM star_wars_survey
+  UNION ALL SELECT 'C3PO', RATE_C_3P0 FROM star_wars_survey
+  UNION ALL SELECT 'R2_D2', RATE_R2_D2 FROM star_wars_survey
+  UNION ALL SELECT 'Yoda', RATE_YODA FROM star_wars_survey
+  UNION ALL SELECT 'Jar Jar Binks', RATE_JAR_JAR_BINKS FROM star_wars_survey
+) AS character_ratings
+WHERE rating IS NOT NULL
+GROUP BY character_name;
+
+
+
+
+
+
+
+
 
 
 
