@@ -1,9 +1,9 @@
 # May the 4th be with you: Exploring the Star Wars Universe with Data
 
 ### Overview
-This project contains the files used to create the Snowflake Snowsight dashboard for exploring data related to the Star Wars universe. 
-The dashboard includes visualizations and insights on various aspects of the Star Wars franchise.
-This dashboard is intended for Star Wars enthusiasts and data analysts who want to gain insights into the Star Wars universe.
+This project contains the files used to create the Snowsight dashboard for exploring data related to the Star Wars universe. 
+This project demonstrates how Snowsight can be used to create a dashboard for exploring data related to the Star Wars universe.
+The dashboard includes a number of visualizations, such as bar charts,line charts, scatterplots and heatmaps, that provide insights into various aspects of the Star Wars franchise.
 
 ### Data sources
 The data used to create this dashboard was sourced from kaggle and data.world
