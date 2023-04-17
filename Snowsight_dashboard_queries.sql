@@ -14,7 +14,7 @@ Create or replace stage my_stage;
 https://developers.snowflake.com/snowsql/
 
 --connect to your snowflake account by running this command in the terminal
-snowsql -a <account_name> -u <username> -p <password> -r <region>
+snowsql -a <account_name> -u <username> 
 
 
 -- Upload the csv into stage by running the below command in SnowSQL(CLI)
@@ -28,7 +28,7 @@ list @my_stage;
 
 
 -- Create a table to store Star Wars character information
-CREATE OR REPLACE TABLE CHARACTERS
+CREATE OR REPLACE TABLE STAR_WARS_DB.SW_DATA.CHARACTERS
 (
 name varchar(10000),
 height varchar(1000),
@@ -44,7 +44,7 @@ species varchar(10000)
 
 
 -- Create a table to store movie ratings information
-CREATE OR REPLACE TABLE MOVIE_RATING (
+CREATE OR REPLACE TABLE STAR_WARS_DB.SW_DATA.MOVIE_RATING (
 Year INT,
 Title VARCHAR(255),
 Rated VARCHAR(10),
@@ -60,7 +60,7 @@ Globalboxoffice_revenue number
 );
 
 -- Create a table to store Star Wars survey data
-CREATE OR REPLACE TABLE Star_wars_survey (
+CREATE OR REPLACE TABLE STAR_WARS_DB.SW_DATA.Star_wars_survey (
 RespondentID varchar(1000),
 Have_you_seen_any_of_the_6_films_in_the_Star_Wars_franchise varchar(1000),
 Do_you_consider_yourself_to_be_a_fan_of_the_Star_Wars_film_franchise varchar(1000),
