@@ -1,6 +1,6 @@
 
---Sign up for a free Snowfalke trial account using the below link
-https://signup.snowflake.com/
+--Sign up for a free Snowfalke trial account using link provided in the Readme file
+
 
 -- Create a new Snowflake warehouse , database and schema
 CREATE WAREHOUSE LIGHTSPEED_WH;
@@ -10,8 +10,7 @@ CREATE SCHEMA SW_DATA;
 -- Create an internal stage to upload the csv files
 Create or replace stage my_stage;
 
---download snowsql from 
-https://developers.snowflake.com/snowsql/
+--download snowsql from the link provided in the Readme file
 
 --connect to your snowflake account by running this command in the terminal
 snowsql -a <account_name> -u <username> 
