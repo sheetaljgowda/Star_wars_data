@@ -186,21 +186,17 @@ SELECT
     total_movies_directed
 FROM
     STAR_WARS_DB.SW_DATA.MOVIE_RATING M
-    LEFT JOIN CTE C ON M.DIRECTOR = C.DIRECTOR
+    LEFT JOIN CTE C ON M.DIRECTOR = C.DIRECTOR;
     
     
 
 --Query 8 : This query returns the name, homeworld, and species for all Star Wars characters in the
 --Represented as a table in dashboard
 
-select name,homeworld,species from STAR_WARS_DB.SW_DATA.characters  where species=:species and homeworld=:homeworld
+select name,homeworld,species from STAR_WARS_DB.SW_DATA.characters  where species=:species and homeworld=:homeworld;
 
 ---Query 9 : This query counts the number of characters belonging to a specific species and living on a specific homeworld
-select count(name),homeworld,species from STAR_WARS_DB.SW_DATA.characters  
-and species<>'NA' and homeworld<>'NA'
-group by homeworld,species;
 
---after filter
 select count(name),homeworld,species from STAR_WARS_DB.SW_DATA.characters where species=:species and homeworld=:homeworld
 and species<>'NA' and homeworld<>'NA'
 group by homeworld,species;
