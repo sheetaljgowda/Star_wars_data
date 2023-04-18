@@ -1,19 +1,19 @@
 
 --Sign up for a free Snowfalke trial account using link provided in the Readme file
-
-
--- Create a new Snowflake warehouse , database and schema
+-- Create a new Snowflake warehouse ,database and schema
 CREATE WAREHOUSE LIGHTSPEED_WH;
 CREATE DATABASE STAR_WARS_DB;
 CREATE SCHEMA SW_DATA;
 
 -- Create an internal stage to upload the csv files
-Create or replace stage my_stage;
+Create or replace stage STAR_WARS_DB.SW_DATA.my_stage;
 
 /*You can download SnowSQL from the link provided in the Readme file and 
 then connect to your Snowflake account by running the following command in the terminal*/
 
 snowsql -a <account_name> -u <username>
+--You need to replace <account_name> with the name of your Snowflake account 
+-- <username> with your Snowflake username
 
 
 -- Upload the csv into stage by running the below command in SnowSQL(CLI)
@@ -21,6 +21,7 @@ PUT file:///<path_to_local_file>/Star_wars_characters.csv @my_stage;
 PUT file:///<path_to_local_file>/star_wars_movie_ratings.csv @my_stage;
 PUT file:///<path_to_local_file>/star_wars_survey.csv @my_stage;
 --Note: You would need to replace <path_to_local_file> with the actual path to the star_wars_characters.csv file on your local machine.
+
 
 --Run the below commands in SnowSQL
 
@@ -133,24 +134,21 @@ SELECT * FROM STAR_WARS_DB.SW_DATA.CHARACTERS;
 
 --- Query 1: Returns the total count of characters in the characters table.
 ---Represented as First scorecard in dashboard
-select count(name) from characters;
+select count(name) from STAR_WARS_DB.SW_DATA.characters;
 
 --- Query 2: Calculates the average global box office revenue for all Star Wars movies.
 ---Represented as second scorecard in dashboard
-select round(avg(globalboxoffice_revenue), 2) as Avg_revenue from movie_rating;
---after adding filter
+
 select round(avg(globalboxoffice_revenue), 2) as Avg_revenue
-from movie_rating where title = :title;
+from STAR_WARS_DB.SW_DATA.movie_rating where title = :title;
 
 --- Query 3: Calculates the average runtime for all Star Wars movies.
 --- Represented as third scorecard in dashboard
-select round(avg(runtime),2) as avg_runtime  from movie_rating;
---after filter
-select round(avg(runtime),2) as avg_runtime  from movie_rating where title=:title;
+select round(avg(runtime),2) as avg_runtime  from STAR_WARS_DB.SW_DATA.movie_rating where title=:title;
 
 --Query 4 : This query returns the release year and title of all Star Wars movies
 --represented as table in dashboard
-select year,TITLE as Movie from movie_rating order by year;
+select year,TITLE as Movie from STAR_WARS_DB.SW_DATA.movie_rating order by year;
 
 
 --- Query 5 :Returns the year, IMDB rating, Rotten Tomatoes score and metascore for each of the Star Wars movie,
@@ -159,15 +157,12 @@ select year,
 (imdbrating*10) as imdbrating,
 (rottentomatoscore*100) as rottentomatoscore, 
 metascore as metascore 
-from movie_rating order by year;
+from STAR_WARS_DB.SW_DATA.movie_rating order by year;
 
 ----Query 6: Returns movie title , globalboxoffice_revenue_in_millions and awards won by each movie
 --- Represented as bar chart in dashboard
-select title as movie, globalboxoffice_revenue as globalboxoffice_revenue_in_millions,AWARDS from movie_rating 
-order by globalboxoffice_revenue,AWARDS;
-
---after filter
-select title as movie, globalboxoffice_revenue as globalboxoffice_revenue_in_millions,AWARDS from movie_rating 
+select title as movie, globalboxoffice_revenue as globalboxoffice_revenue_in_millions,AWARDS 
+from STAR_WARS_DB.SW_DATA.movie_rating 
 where title=:title
 order by globalboxoffice_revenue,AWARDS;
 
@@ -180,7 +175,7 @@ WITH CTE AS (
         AVG(METASCORE) AS AVG_METASCORE,
         COUNT(DIRECTOR) as total_movies_directed
     FROM
-        MOVIE_RATING
+        STAR_WARS_DB.SW_DATA.MOVIE_RATING
     GROUP BY
         DIRECTOR
 )
@@ -190,31 +185,30 @@ SELECT
     AVG_METASCORE,
     total_movies_directed
 FROM
-    MOVIE_RATING M
+    STAR_WARS_DB.SW_DATA.MOVIE_RATING M
     LEFT JOIN CTE C ON M.DIRECTOR = C.DIRECTOR
     
     
 
 --Query 8 : This query returns the name, homeworld, and species for all Star Wars characters in the
 --Represented as a table in dashboard
-select name,homeworld,species from characters;
---after filter
-select name,homeworld,species from characters  where species=:species and homeworld=:homeworld
+
+select name,homeworld,species from STAR_WARS_DB.SW_DATA.characters  where species=:species and homeworld=:homeworld
 
 ---Query 9 : This query counts the number of characters belonging to a specific species and living on a specific homeworld
-select count(name),homeworld,species from characters  
+select count(name),homeworld,species from STAR_WARS_DB.SW_DATA.characters  
 and species<>'NA' and homeworld<>'NA'
 group by homeworld,species;
 
 --after filter
-select count(name),homeworld,species from characters where species=:species and homeworld=:homeworld
+select count(name),homeworld,species from STAR_WARS_DB.SW_DATA.characters where species=:species and homeworld=:homeworld
 and species<>'NA' and homeworld<>'NA'
 group by homeworld,species;
 
 --Query 10 :  This query returns the average mass and average height for each Star Wars character in the characters table
 --Represented as scatter plot in dashboard
 SELECT name, ROUND(AVG(mass),2) AS avg_mass,round(AVG(HEIGHT),2) AS avg_height
-FROM characters 
+FROM STAR_WARS_DB.SW_DATA.characters 
 GROUP BY name 
 order by avg_height desc;
 
@@ -233,7 +227,7 @@ FROM (
   UNION ALL SELECT 'C3PO', RATE_C_3P0 FROM star_wars_survey
   UNION ALL SELECT 'R2_D2', RATE_R2_D2 FROM star_wars_survey
   UNION ALL SELECT 'Yoda', RATE_YODA FROM star_wars_survey
-  UNION ALL SELECT 'Jar Jar Binks', RATE_JAR_JAR_BINKS FROM star_wars_survey
+  UNION ALL SELECT 'Jar Jar Binks', RATE_JAR_JAR_BINKS FROM STAR_WARS_DB.SW_DATA.star_wars_survey
 ) AS character_ratings
 WHERE rating IS NOT NULL
 GROUP BY character_name;
