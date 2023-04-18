@@ -134,25 +134,29 @@ SELECT * FROM STAR_WARS_DB.SW_DATA.CHARACTERS;
 
 --- Query 1: Returns the total count of characters in the characters table.
 ---Represented as First scorecard in dashboard
+--- Title: Total Characters in Dataset
 select count(name) from STAR_WARS_DB.SW_DATA.characters;
 
 --- Query 2: Calculates the average global box office revenue for all Star Wars movies.
 ---Represented as second scorecard in dashboard
-
+--- Title: Avg Revenue in Million
 select round(avg(globalboxoffice_revenue), 2) as Avg_revenue
 from STAR_WARS_DB.SW_DATA.movie_rating where title = :title;
 
 --- Query 3: Calculates the average runtime for all Star Wars movies.
 --- Represented as third scorecard in dashboard
+--Title: Average Runtime in minutes
 select round(avg(runtime),2) as avg_runtime  from STAR_WARS_DB.SW_DATA.movie_rating where title=:title;
 
 --Query 4 : This query returns the release year and title of all Star Wars movies
 --represented as table in dashboard
+--Title: Movie Release Year
 select year,TITLE as Movie from STAR_WARS_DB.SW_DATA.movie_rating order by year;
 
 
 --- Query 5 :Returns the year, IMDB rating, Rotten Tomatoes score and metascore for each of the Star Wars movie,
 --- Represented as line chart in dashboard
+--Title: Movie rating trend(metascore,IMBD,Rotton tomato)
 select year,
 (imdbrating*10) as imdbrating,
 (rottentomatoscore*100) as rottentomatoscore, 
@@ -161,6 +165,7 @@ from STAR_WARS_DB.SW_DATA.movie_rating order by year;
 
 ----Query 6: Returns movie title , globalboxoffice_revenue_in_millions and awards won by each movie
 --- Represented as bar chart in dashboard
+--Title: Movie Revenue and Awards won
 select title as movie, globalboxoffice_revenue as globalboxoffice_revenue_in_millions,AWARDS 
 from STAR_WARS_DB.SW_DATA.movie_rating 
 where title=:title
@@ -169,40 +174,43 @@ order by globalboxoffice_revenue,AWARDS;
 
 ---Query 7 : This query calculates the average Metascore and total number of movies directed by each director in the movie_rating table
 --- Represented as a heatgrid on dashboard
+--Title: No of movies directed and highest rating
 WITH CTE AS (
     SELECT
         DIRECTOR,
-        AVG(METASCORE) AS AVG_METASCORE,
+        mode(METASCORE) AS HIGHEST_METASCORE,
         COUNT(DIRECTOR) as total_movies_directed
     FROM
-        STAR_WARS_DB.SW_DATA.MOVIE_RATING
+        MOVIE_RATING
     GROUP BY
         DIRECTOR
 )
 SELECT
     TITLE,
     M.DIRECTOR,
-    AVG_METASCORE,
+    HIGHEST_METASCORE,
     total_movies_directed
 FROM
-    STAR_WARS_DB.SW_DATA.MOVIE_RATING M
+    MOVIE_RATING M
     LEFT JOIN CTE C ON M.DIRECTOR = C.DIRECTOR;
     
     
 
 --Query 8 : This query returns the name, homeworld, and species for all Star Wars characters in the
 --Represented as a table in dashboard
-
+--Title: Home world and species
 select name,homeworld,species from STAR_WARS_DB.SW_DATA.characters  where species=:species and homeworld=:homeworld;
 
 ---Query 9 : This query counts the number of characters belonging to a specific species and living on a specific homeworld
-
+--- Represented as stacked bar chart on dashboard
+-- Title: Star Wars Characters by Species and Home Planet
 select count(name),homeworld,species from STAR_WARS_DB.SW_DATA.characters where species=:species and homeworld=:homeworld
 and species<>'NA' and homeworld<>'NA'
 group by homeworld,species;
 
 --Query 10 :  This query returns the average mass and average height for each Star Wars character in the characters table
 --Represented as scatter plot in dashboard
+--Title: Avg Height vs Mass
 SELECT name, ROUND(AVG(mass),2) AS avg_mass,round(AVG(HEIGHT),2) AS avg_height
 FROM STAR_WARS_DB.SW_DATA.characters 
 GROUP BY name 
@@ -210,6 +218,7 @@ order by avg_height desc;
 
 --Query 11:This query calculates the number of "very favorable" ratings for each Star Wars character based on responses from a survey.
 -- Represented as bar chart in dashboard
+--Title: Most Favorite Character
 SELECT 
   character_name, 
   SUM(CASE WHEN rating = 'Very favorably' THEN 1 ELSE 0 END) AS very_favorable
