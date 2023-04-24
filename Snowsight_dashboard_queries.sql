@@ -130,6 +130,19 @@ ON_ERROR = 'CONTINUE';
 SELECT * FROM STAR_WARS_DB.SW_DATA.CHARACTERS;
 
 
+
+
+---Add these filters to the snowsight dashboard before we start to build the dashboard
+--Create custom filters using the below queries
+--homeworld filter
+select distinct homeworld from characters;
+--species filter
+select distinct species from characters;
+--movie_title
+select distinct title from movie_rating;
+
+
+
 --- These queries were used to build a dashboard that displays data related to Star Wars movies and characters 
 
 --- Query 1: Returns the total count of characters in the characters table.
@@ -239,7 +252,9 @@ GROUP BY character_name;
 
 
 
-
+--Code Clean up
+DROP WAREHOUSE LIGHTSPEED_WH;
+DROP DATABASE STAR_WARS_DB;
 
 
 
