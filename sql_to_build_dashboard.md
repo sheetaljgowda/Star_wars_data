@@ -236,6 +236,7 @@ GROUP BY name
 order by avg_height desc;
  ```
  
+ ### Call to action
  Query 11: This query calculates the number of "very favorable" ratings for each Star Wars character based on responses from a survey.
   ```sql
 -- Represented as bar chart in dashboard
