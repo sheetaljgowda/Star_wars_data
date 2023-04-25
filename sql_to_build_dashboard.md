@@ -259,4 +259,5 @@ FROM (
 WHERE rating IS NOT NULL
 GROUP BY character_name;
  ```
+ ### Code Cleanup
  
