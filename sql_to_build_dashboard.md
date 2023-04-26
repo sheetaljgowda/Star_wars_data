@@ -55,43 +55,6 @@ RottenTomatoScore DECIMAL(3,2),
 Globalboxoffice_revenue number
 );
 
--- Table to store Star Wars survey data
-CREATE OR REPLACE TABLE STAR_WARS_DB.SW_DATA.Star_wars_survey (
-RespondentID varchar(1000),
-Have_you_seen_any_of_the_6_films_in_the_Star_Wars_franchise varchar(1000),
-Do_you_consider_yourself_to_be_a_fan_of_the_Star_Wars_film_franchise varchar(1000),
-Episode_1 varchar(1000),
-Episode_2 varchar(1000),
-Episode_3 varchar(1000),
-Episode_4 varchar(1000),
-Episode_5 varchar(1000),
-Episode_6 varchar(1000),
-Rating_Episode_1 varchar(1000),
-Rating_Episode_2 varchar(1000),
-Rating_Episode_3 varchar(1000),
-Rating_Episode_4 varchar(1000),
-Rating_Episode_5 varchar(1000),
-Rating_Episode_6 varchar(1000),
-Rate_Han_Solo varchar(1000),
-Rate_Luke_Skywalker varchar(1000),
-Rate_Princess_Leia_Organa varchar(1000),
-Rate_Anakin_Skywalker varchar(1000),
-Rate_Obi_Wan_Kenobi varchar(1000),
-Rate_Emperor_Palpatine varchar(1000),
-Rate_Darth_Vader varchar(1000),
-Rate_Lando_Calrissian varchar(1000),
-Rate_Boba_Fett varchar(1000),
-rate_C_3P0 varchar(1000),
-Rate_R2_D2 varchar(1000),
-Rate_Jar_Jar_Binks varchar(1000),
-Rate_Padme_Amidala varchar(1000),
-Rate_Yoda varchar(1000),
-Do_you_consider_yourself_to_be_a_fan_of_the_Star_Trek_franchise varchar(1000),
-Gender varchar(1000),
-Age varchar(1000),
-Education varchar(1000)
-);
-``` 
 
  ```sql
 INSERT INTO STAR_WARS_DB.SW_DATA.CHARACTERS (name, height, mass, hair_color, skin_color, eye_color, birth_year, gender, homeworld, species)
@@ -332,6 +295,45 @@ order by avg_height desc;
  ```
  
  ### Call to action
+ Create table Star_wars_survey and load data using the file Star_wars_survey
+ ```sql
+ -- Table to store Star Wars survey data 
+CREATE OR REPLACE TABLE STAR_WARS_DB.SW_DATA.Star_wars_survey (
+RespondentID varchar(1000),
+Have_you_seen_any_of_the_6_films_in_the_Star_Wars_franchise varchar(1000),
+Do_you_consider_yourself_to_be_a_fan_of_the_Star_Wars_film_franchise varchar(1000),
+Episode_1 varchar(1000),
+Episode_2 varchar(1000),
+Episode_3 varchar(1000),
+Episode_4 varchar(1000),
+Episode_5 varchar(1000),
+Episode_6 varchar(1000),
+Rating_Episode_1 varchar(1000),
+Rating_Episode_2 varchar(1000),
+Rating_Episode_3 varchar(1000),
+Rating_Episode_4 varchar(1000),
+Rating_Episode_5 varchar(1000),
+Rating_Episode_6 varchar(1000),
+Rate_Han_Solo varchar(1000),
+Rate_Luke_Skywalker varchar(1000),
+Rate_Princess_Leia_Organa varchar(1000),
+Rate_Anakin_Skywalker varchar(1000),
+Rate_Obi_Wan_Kenobi varchar(1000),
+Rate_Emperor_Palpatine varchar(1000),
+Rate_Darth_Vader varchar(1000),
+Rate_Lando_Calrissian varchar(1000),
+Rate_Boba_Fett varchar(1000),
+rate_C_3P0 varchar(1000),
+Rate_R2_D2 varchar(1000),
+Rate_Jar_Jar_Binks varchar(1000),
+Rate_Padme_Amidala varchar(1000),
+Rate_Yoda varchar(1000),
+Do_you_consider_yourself_to_be_a_fan_of_the_Star_Trek_franchise varchar(1000),
+Gender varchar(1000),
+Age varchar(1000),
+Education varchar(1000)
+);
+``` 
  Query 11: This query calculates the number of "very favorable" ratings for each Star Wars character based on responses from a survey.
   ```sql
 -- Represented as bar chart in dashboard
