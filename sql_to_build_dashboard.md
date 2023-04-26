@@ -366,17 +366,15 @@ FILE_FORMAT = (TYPE = CSV, FIELD_DELIMITER = ',',SKIP_HEADER = 1)
 ON_ERROR = 'CONTINUE';
 
  
- This query calculates the number of "very favorable" ratings for each Star Wars character based on responses from a survey.
- 
- ```sql
- 
+--This query calculates the number of "very favorable" ratings for each Star Wars character based on responses from a survey.
 -- Represented as bar chart in dashboard
 --Title: Most Favorite Character
+
 SELECT 
   character_name, 
   SUM(CASE WHEN rating = 'Very favorably' THEN 1 ELSE 0 END) AS very_favorable
 FROM (
-  SELECT 'Luke Skywalker' AS character_name, RATE_LUKE_SKYWALKER AS rating FROM star_wars_survey
+  SELECT 'Luke Skywalker' AS character_name, RATE_LUKE_SKYWALKER AS rating FROM STAR_WARS_DB.SW_DATA.STAR_WARS_SURVEY
   UNION ALL SELECT 'Han Solo', RATE_HAN_SOLO FROM star_wars_survey
   UNION ALL SELECT 'Princess Leia', RATE_PRINCESS_LEIA_ORGANA FROM star_wars_survey
   UNION ALL SELECT 'Anakin Skywalker', RATE_ANAKIN_SKYWALKER FROM star_wars_survey
@@ -385,10 +383,18 @@ FROM (
   UNION ALL SELECT 'C3PO', RATE_C_3P0 FROM star_wars_survey
   UNION ALL SELECT 'R2_D2', RATE_R2_D2 FROM star_wars_survey
   UNION ALL SELECT 'Yoda', RATE_YODA FROM star_wars_survey
-  UNION ALL SELECT 'Jar Jar Binks', RATE_JAR_JAR_BINKS FROM STAR_WARS_DB.SW_DATA.star_wars_survey
+  UNION ALL SELECT 'Jar Jar Binks', RATE_JAR_JAR_BINKS FROM STAR_WARS_DB.SW_DATA.STAR_WARS_SURVEY
 ) AS character_ratings
 WHERE rating IS NOT NULL
 GROUP BY character_name;
  ```
  ### Code Cleanup
  
+``` sql
+ USE ROLE JEDI;
+ DROP DATABASE STAR_WARS_DB;
+ 
+ USE ROLE ACCOUNTADMIN;
+ DROP WAREHOUSE LIGHTSPEED_WH;
+ DROP ROLE JEDI;
+``` 
