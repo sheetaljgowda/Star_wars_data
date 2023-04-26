@@ -20,9 +20,7 @@ CREATE OR REPLACE SCHEMA SW_DATA;
 ## Snowflake data load
  
  ```sql
-Create or replace stage STAR_WARS_DB.SW_DATA.my_stage;
-
--- Create our three tables and import the data from local
+-- Create two tables 
 -- Table to store Star Wars character information
 CREATE OR REPLACE TABLE STAR_WARS_DB.SW_DATA.CHARACTERS
 (
@@ -56,6 +54,7 @@ Globalboxoffice_revenue number
 );
  ```
 
+Insert data into the two tables
  ```sql
 INSERT INTO STAR_WARS_DB.SW_DATA.CHARACTERS (name, height, mass, hair_color, skin_color, eye_color, birth_year, gender, homeworld, species)
 VALUES
