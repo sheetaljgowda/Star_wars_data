@@ -181,15 +181,14 @@ INSERT INTO STAR_WARS_DB.SW_DATA.MOVIE_RATING (
 SELECT * FROM STAR_WARS_DB.SW_DATA.MOVIE_RATING;
 
  ```
-
- ```sql
  ### Create custom filters using the below queries
+ ```sql
   --homeworld filter
-select distinct homeworld from characters;
+select distinct homeworld from STAR_WARS_DB.SW_DATA.CHARACTERS;
 --species filter
-select distinct species from characters;
+select distinct species from STAR_WARS_DB.SW_DATA.CHARACTERS;
 --movie_title
-select distinct title from movie_rating;
+select distinct title from STAR_WARS_DB.SW_DATA.movie_rating;
 
   ```
  
