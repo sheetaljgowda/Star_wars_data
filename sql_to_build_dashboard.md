@@ -245,7 +245,7 @@ order by globalboxoffice_revenue,AWARDS;
 WITH CTE AS (
     SELECT
         DIRECTOR,
-        mode(METASCORE) AS HIGHEST_METASCORE,
+        max(METASCORE) AS HIGHEST_METASCORE,
         COUNT(DIRECTOR) as total_movies_directed
     FROM
         MOVIE_RATING
