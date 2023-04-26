@@ -172,11 +172,11 @@ INSERT INTO STAR_WARS_DB.SW_DATA.MOVIE_RATING (
     (2019,'Star Wars: Episode IX - The Rise of Skywalker','PG-13',	'12/20/19', 142	, 'J.J. Abrams',
     'Nominated for 3 Oscars. Another 7 wins & 35 nominations.', 53, 294411, 6.7, 0.52, 1074.15);
 
- ```
-
-
 -- Verify if the STAR_WARS_SURVEY table was loaded successfully
 SELECT * FROM STAR_WARS_DB.SW_DATA.CHARACTERS;
+
+ ```
+
  ```
  ### Create custom filters using the below queries
   ```sql
@@ -187,6 +187,7 @@ select distinct species from characters;
 --movie_title
 select distinct title from movie_rating;
   ```
+ 
  
  ### Queries  used to build the Snowsight dashboard 
 Query 1: This query returns the total count of characters in the characters table.
