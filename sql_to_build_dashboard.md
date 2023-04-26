@@ -54,7 +54,7 @@ imdbRating DECIMAL(3,1),
 RottenTomatoScore DECIMAL(3,2),
 Globalboxoffice_revenue number
 );
-
+ ```
 
  ```sql
 INSERT INTO STAR_WARS_DB.SW_DATA.CHARACTERS (name, height, mass, hair_color, skin_color, eye_color, birth_year, gender, homeworld, species)
