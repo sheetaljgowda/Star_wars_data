@@ -277,7 +277,7 @@ and species<>'NA' and homeworld<>'NA'
 group by homeworld,species;
  ```
  
- Query 10 :  This query returns the average mass and average height for each Star Wars character in the characters table
+ Query 10 :  This query returns the average mass and average height for each species in the characters table
   ```sql
 --Represented as scatter plot in dashboard
 --Title: Avg Height vs Mass
