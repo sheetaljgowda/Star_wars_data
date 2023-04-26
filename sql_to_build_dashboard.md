@@ -297,22 +297,9 @@ order by avg_height desc;
  ## Execute these statements in Terminal
 
 Note:
-You need to replace <account_name> with the name of your Snowflake account 
 
-You would need to replace <path_to_local_file> with the actual path to the star_wars_characters.csv file on your local machine
-
-``` terminal
-snowsql -a <account_name> -u <username>
-use database STAR_WARS_DB;
-use schema SW_DATA;
-PUT file:///<path_to_local_file>/star_wars_survey.csv @my_stage;
-
-```
-
-Copy these SQL statements into a Snowflake Worksheet and execute them one by one
-
- ```sql
- 
+```sql
+Create or replace stage STAR_WARS_DB.SW_DATA.MY_STAGE;
  USE ROLE JEDI;
  -- Table to store Star Wars survey data 
 CREATE OR REPLACE TABLE STAR_WARS_DB.SW_DATA.Star_wars_survey (
@@ -350,17 +337,36 @@ Gender varchar(1000),
 Age varchar(1000),
 Education varchar(1000)
 );
+```
+
+You need to replace <account_name> with the name of your Snowflake account 
+
+You would need to replace <path_to_local_file> with the actual path to the star_wars_characters.csv file on your local machine
+
+``` terminal
+snowsql -a <account_name> -u <username>
+use database STAR_WARS_DB;
+use schema SW_DATA;
+PUT file:///<path_to_local_file>/star_wars_survey.csv @my_stage;
+
+```
+
+Copy these SQL statements into a Snowflake Worksheet and execute them one by one
+
+ ```sql
 
 -- Copy data from the CSV files to the Star_wars_survey table
 
 COPY INTO STAR_WARS_DB.SW_DATA.STAR_WARS_SURVEY
-FROM @my_stage/star_wars_survey.csv
+FROM @MY_STAGE/star_wars_survey.csv
 FILE_FORMAT = (TYPE = CSV, FIELD_DELIMITER = ',',SKIP_HEADER = 1)
 ON_ERROR = 'CONTINUE';
 
  
  This query calculates the number of "very favorable" ratings for each Star Wars character based on responses from a survey.
-  ```sql
+ 
+ ```sql
+ 
 -- Represented as bar chart in dashboard
 --Title: Most Favorite Character
 SELECT 
