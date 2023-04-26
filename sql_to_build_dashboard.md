@@ -177,7 +177,7 @@ SELECT * FROM STAR_WARS_DB.SW_DATA.CHARACTERS;
 
  ```
 
- ```
+ ```sql
  ### Create custom filters using the below queries
   --homeworld filter
 select distinct homeworld from characters;
