@@ -10,10 +10,13 @@ The dashboard includes a number of visualizations, such as bar charts,line chart
 Before you begin, you'll need to have the following:
 
 - A free trial account on Snowflake. You can sign up for one [here](https://signup.snowflake.com/).
-- SnowSQL installed on your machine. You can download it from the [Snowflake website](https://developers.snowflake.com/snowsql/).
 
 ### Data sources
 The data used to create this dashboard was sourced from kaggle and data.world
+
+## Optional
+To install SnowSQL on your machine. 
+You can download it from the [Snowflake website](https://developers.snowflake.com/snowsql/).
 
 
 
