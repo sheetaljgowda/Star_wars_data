@@ -138,7 +138,9 @@ VALUES
 ('Poe Dameron','178','79','brown','light','brown','NA','male','NA','Human'),
 ('BB8','96','32','none','none','black','NA','none','NA','Droid'),
 ('Finn','175','86','black','dark','dark','NA','male','NA','Human');
-
+ ```
+ 
+ ```sql
 INSERT INTO STAR_WARS_DB.SW_DATA.MOVIE_RATING (
     Year, Title, Rated, Released, Runtime, Director, Awards, Metascore, imdbVotes,
     imdbRating, RottenTomatoScore, Globalboxoffice_revenue) 
@@ -172,47 +174,6 @@ INSERT INTO STAR_WARS_DB.SW_DATA.MOVIE_RATING (
 
  ```
 
-## Execute these statements in Terminal
-
-Note:
-You need to replace <account_name> with the name of your Snowflake account 
-
-You would need to replace <path_to_local_file> with the actual path to the star_wars_characters.csv file on your local machine
-
-``` terminal
-snowsql -a <account_name> -u <username>
-use database STAR_WARS_DB;
-use schema SW_DATA;
-PUT file:///<path_to_local_file>/Star_wars_characters.csv @my_stage;
-PUT file:///<path_to_local_file>/star_wars_movie_ratings.csv @my_stage;
-PUT file:///<path_to_local_file>/star_wars_survey.csv @my_stage;
-
-```
-Copy these SQL statements into a Snowflake Worksheet and execute them one by one
- ```sql
--- Copy data from the CSV files to the MOVIE_RATING table
-COPY INTO STAR_WARS_DB.SW_DATA.MOVIE_RATING
-FROM @my_stage/star_wars_movie_ratings.csv
-FILE_FORMAT = (TYPE = CSV, FIELD_DELIMITER = ',', SKIP_HEADER = 1)
-ON_ERROR = 'CONTINUE';
-
--- Verify if the MOVIE_RATING table was loaded successfully
-SELECT * FROM STAR_WARS_DB.SW_DATA.MOVIE_RATING;
-
--- Copy data from the CSV files to the CHARACTERS table
-COPY INTO STAR_WARS_DB.SW_DATA.CHARACTERS
-FROM @my_stage/Star_wars_characters.csv
-FILE_FORMAT = (TYPE = CSV, FIELD_DELIMITER = ',', SKIP_HEADER = 1)
-ON_ERROR = 'CONTINUE';
-
--- Verify if the CHARACTERS table was loaded successfully
-SELECT * FROM STAR_WARS_DB.SW_DATA.CHARACTERS;
-
--- Copy data from the CSV files to the Star_wars_survey table
-COPY INTO STAR_WARS_DB.SW_DATA.STAR_WARS_SURVEY
-FROM @my_stage/star_wars_survey.csv
-FILE_FORMAT = (TYPE = CSV, FIELD_DELIMITER = ',',SKIP_HEADER = 1)
-ON_ERROR = 'CONTINUE';
 
 -- Verify if the STAR_WARS_SURVEY table was loaded successfully
 SELECT * FROM STAR_WARS_DB.SW_DATA.CHARACTERS;
@@ -326,6 +287,49 @@ order by avg_height desc;
  ```
  
  ### Optional
+ 
+ ## Execute these statements in Terminal
+
+Note:
+You need to replace <account_name> with the name of your Snowflake account 
+
+You would need to replace <path_to_local_file> with the actual path to the star_wars_characters.csv file on your local machine
+
+``` terminal
+snowsql -a <account_name> -u <username>
+use database STAR_WARS_DB;
+use schema SW_DATA;
+PUT file:///<path_to_local_file>/Star_wars_characters.csv @my_stage;
+PUT file:///<path_to_local_file>/star_wars_movie_ratings.csv @my_stage;
+PUT file:///<path_to_local_file>/star_wars_survey.csv @my_stage;
+
+```
+Copy these SQL statements into a Snowflake Worksheet and execute them one by one
+ ```sql
+-- Copy data from the CSV files to the MOVIE_RATING table
+COPY INTO STAR_WARS_DB.SW_DATA.MOVIE_RATING
+FROM @my_stage/star_wars_movie_ratings.csv
+FILE_FORMAT = (TYPE = CSV, FIELD_DELIMITER = ',', SKIP_HEADER = 1)
+ON_ERROR = 'CONTINUE';
+
+-- Verify if the MOVIE_RATING table was loaded successfully
+SELECT * FROM STAR_WARS_DB.SW_DATA.MOVIE_RATING;
+
+-- Copy data from the CSV files to the CHARACTERS table
+COPY INTO STAR_WARS_DB.SW_DATA.CHARACTERS
+FROM @my_stage/Star_wars_characters.csv
+FILE_FORMAT = (TYPE = CSV, FIELD_DELIMITER = ',', SKIP_HEADER = 1)
+ON_ERROR = 'CONTINUE';
+
+-- Verify if the CHARACTERS table was loaded successfully
+SELECT * FROM STAR_WARS_DB.SW_DATA.CHARACTERS;
+
+-- Copy data from the CSV files to the Star_wars_survey table
+COPY INTO STAR_WARS_DB.SW_DATA.STAR_WARS_SURVEY
+FROM @my_stage/star_wars_survey.csv
+FILE_FORMAT = (TYPE = CSV, FIELD_DELIMITER = ',',SKIP_HEADER = 1)
+ON_ERROR = 'CONTINUE';
+
  Create table Star_wars_survey and load data using the file Star_wars_survey
  ```sql
  -- Table to store Star Wars survey data 
