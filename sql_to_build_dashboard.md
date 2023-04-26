@@ -138,6 +138,38 @@ VALUES
 ('Poe Dameron','178','79','brown','light','brown','NA','male','NA','Human'),
 ('BB8','96','32','none','none','black','NA','none','NA','Droid'),
 ('Finn','175','86','black','dark','dark','NA','male','NA','Human');
+
+INSERT INTO STAR_WARS_DB.SW_DATA.MOVIE_RATING (
+    Year, Title, Rated, Released, Runtime, Director, Awards, Metascore, imdbVotes,
+    imdbRating, RottenTomatoScore, Globalboxoffice_revenue) 
+    VALUES (
+    1977, 'Star Wars: Episode IV - A New Hope', 'PG', '5/25/77', 121, 'George Lucas',
+    'Won 6 Oscars. Another 52 wins & 28 nominations.', 90, 1181083, 8.6, 0.92, 848.75),
+    (
+    1980, 'Star Wars: Episode V - The Empire Strikes Back', 'PG', '6/20/80', 124, 'Irvin Kershner',
+    'Won 1 Oscar. Another 24 wins & 20 nominations.', 82, 1109656, 8.7, 0.94, 538.38), 
+    (
+    1983, 'Star Wars: Episode VI - Return of the Jedi', 'PG', '5/25/83', 131, 'Richard Marquand',
+    'Nominated for 4 Oscars. Another 22 wins & 16 nominations.', 58, 912250, 8.3, 0.82, 475.11), 
+    (
+    1999, 'Star Wars: Episode I - The Phantom Menace', 'PG', '5/19/99', 136, 'George Lucas',
+    'Nominated for 3 Oscars. Another 26 wins & 65 nominations.', 51, 698744, 6.5, 0.53, 1056.06),
+    (
+    2002, 'Star Wars: Episode II - Attack of the Clones', 'PG', '5/16/02', 142, 'George Lucas',
+    'Nominated for 1 Oscar. Another 19 wins & 63 nominations.', 54, 613768, 6.5, 0.65, 775.40),
+    (
+    2005, 'Star Wars: Episode III - Revenge of the Sith', 'PG-13', '5/19/05', 140, 'George Lucas',
+    'Nominated for 1 Oscar. Another 26 wins & 61 nominations.', 68, 681075, 7.5, 0.8, 1027.04), 
+    (
+    2015, 'Star Wars: Episode VII - The Force Awakens', 'PG-13', '12/18/15', 138, 'J.J. Abrams',
+    'Nominated for 5 Oscars. Another 62 wins & 125 nominations.', 80, 833706, 7.9, 0.93, 2068.22), 
+    (
+    2017, 'Star Wars: Episode VIII - The Last Jedi', 'PG-13', '12/15/17', 152, 'Rian Johnson',
+    'Nominated for 4 Oscars. Another 22 wins & 88 nominations.', 85, 532835, 7, 0.91, 1332.54
+    ),
+    (2019,'Star Wars: Episode IX - The Rise of Skywalker','PG-13',	'12/20/19', 142	, 'J.J. Abrams',
+    'Nominated for 3 Oscars. Another 7 wins & 35 nominations.', 53, 294411, 6.7, 0.52, 1074.15);
+
  ```
 
 ## Execute these statements in Terminal
