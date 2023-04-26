@@ -294,7 +294,7 @@ GROUP BY name
 order by avg_height desc;
  ```
  
- ### Call to action
+ ### Optional
  Create table Star_wars_survey and load data using the file Star_wars_survey
  ```sql
  -- Table to store Star Wars survey data 
