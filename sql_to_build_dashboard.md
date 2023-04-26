@@ -2,10 +2,19 @@
 Copy these SQL statements into a Snowflake Worksheet, select all and execute them 
 
 ``` sql
--- Create the Snowflake warehouse ,database and schema 
-CREATE WAREHOUSE LIGHTSPEED_WH;
-CREATE DATABASE STAR_WARS_DB;
-CREATE SCHEMA SW_DATA;;
+-- Create the Snowflake Custom role, warehouse ,database and schema 
+USE ROLE ACCOUNTADMIN;
+CREATE or replace WAREHOUSE LIGHTSPEED_WH;
+CREATE or replace ROLE JEDI;
+
+GRANT ROLE JEDI TO ROLE ACCOUNTADMIN;
+GRANT USAGE ON WAREHOUSE LIGHTSPEED_WH TO ROLE JEDI;
+-- Grant CREATE DATABASE privilege to my_custom_role
+GRANT CREATE DATABASE ON ACCOUNT TO ROLE JEDI;
+
+USE ROLE JEDI;
+CREATE OR REPLACE DATABASE STAR_WARS_DB;
+CREATE OR REPLACE SCHEMA SW_DATA;
 ```
  
 ## Snowflake data import
