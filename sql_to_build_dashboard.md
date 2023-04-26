@@ -281,10 +281,14 @@ group by homeworld,species;
   ```sql
 --Represented as scatter plot in dashboard
 --Title: Avg Height vs Mass
-SELECT name, ROUND(AVG(mass),2) AS avg_mass,round(AVG(HEIGHT),2) AS avg_height
-FROM STAR_WARS_DB.SW_DATA.characters 
-GROUP BY name 
+SELECT 
+  species, 
+  ROUND(AVG(mass),2) AS avg_mass,
+  ROUND(AVG(HEIGHT),2) AS avg_height
+FROM characters where species<>'NA'
+GROUP BY species 
 order by avg_height desc;
+
  ```
  
  ### Optional
