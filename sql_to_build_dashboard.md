@@ -139,6 +139,10 @@ VALUES
 ('Poe Dameron','178','79','brown','light','brown','NA','male','NA','Human'),
 ('BB8','96','32','none','none','black','NA','none','NA','Droid'),
 ('Finn','175','86','black','dark','dark','NA','male','NA','Human');
+
+-- Verify if the CHARACTERS table was loaded successfully
+SELECT * FROM STAR_WARS_DB.SW_DATA.CHARACTERS;
+
  ```
  
  ```sql
@@ -173,8 +177,8 @@ INSERT INTO STAR_WARS_DB.SW_DATA.MOVIE_RATING (
     (2019,'Star Wars: Episode IX - The Rise of Skywalker','PG-13',	'12/20/19', 142	, 'J.J. Abrams',
     'Nominated for 3 Oscars. Another 7 wins & 35 nominations.', 53, 294411, 6.7, 0.52, 1074.15);
 
--- Verify if the STAR_WARS_SURVEY table was loaded successfully
-SELECT * FROM STAR_WARS_DB.SW_DATA.CHARACTERS;
+-- Verify if the MOVIE_RATING table was loaded successfully
+SELECT * FROM STAR_WARS_DB.SW_DATA.MOVIE_RATING;
 
  ```
 
