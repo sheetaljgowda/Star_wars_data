@@ -307,6 +307,7 @@ order by avg_height desc;
 This code snippet is used to load a CSV file named "Star_wars_survey.csv" into a Snowflake database using the Snowsql command-line tool. 
 The data from the CSV file will be loaded into a third table called "Star_wars_survey"
 note: you can download the file from [here](star_wars_datasets/star_wars_survey.csv)
+
 Copy these SQL statements into a Snowflake Worksheet and execute them one by one
 ```sql
 
