@@ -2,16 +2,18 @@
 Copy these SQL statements into a Snowflake Worksheet, select all and execute them 
 
 ``` sql
--- Create the Snowflake Custom role, warehouse ,database and schema 
+-- Create the Snowflake virtual warehouse, Custom role,  ,database and schema 
 USE ROLE ACCOUNTADMIN;
 CREATE or replace WAREHOUSE LIGHTSPEED_WH;
 CREATE or replace ROLE JEDI;
 
 GRANT ROLE JEDI TO ROLE ACCOUNTADMIN;
+-- Granting jedi role permission to use LIGHTSPEED_WH warehouse 
 GRANT USAGE ON WAREHOUSE LIGHTSPEED_WH TO ROLE JEDI;
--- Grant CREATE DATABASE privilege to my_custom_role
+-- Grant CREATE DATABASE privilege to jedi role
 GRANT CREATE DATABASE ON ACCOUNT TO ROLE JEDI;
 
+--switch the role to JEDI and create the database and schema
 USE ROLE JEDI;
 CREATE OR REPLACE DATABASE STAR_WARS_DB;
 CREATE OR REPLACE SCHEMA SW_DATA;
@@ -181,13 +183,18 @@ INSERT INTO STAR_WARS_DB.SW_DATA.MOVIE_RATING (
 SELECT * FROM STAR_WARS_DB.SW_DATA.MOVIE_RATING;
 
  ```
- ### Create custom filters using the below queries
+ ### Create custom filters using the below queries using the role JEDI
+ These filters will be used in the Snowsight dashboard queries so make sure to name SQL Keyword correctly
  ```sql
+ 
   --homeworld filter
+--SQL Keyword : homeworld  
 select distinct homeworld from STAR_WARS_DB.SW_DATA.CHARACTERS;
 --species filter
+--SQL Keyword : species 
 select distinct species from STAR_WARS_DB.SW_DATA.CHARACTERS;
---movie_title
+--movie_title filter
+--SQL Keyword : title 
 select distinct title from STAR_WARS_DB.SW_DATA.movie_rating;
 
   ```
@@ -297,13 +304,16 @@ order by avg_height desc;
  
  ### Optional
  
- ## Execute these statements in Terminal
-
-Note:
-
+This code snippet is used to load a CSV file named "Star_wars_survey.csv" into a Snowflake database using the Snowsql command-line tool. 
+The data from the CSV file will be loaded into a third table called "Star_wars_survey"
+note: you can download the file from [here](star_wars_datasets/star_wars_survey.csv)
+Copy these SQL statements into a Snowflake Worksheet and execute them one by one
 ```sql
-Create or replace stage STAR_WARS_DB.SW_DATA.MY_STAGE;
- USE ROLE JEDI;
+
+USE ROLE JEDI;
+
+CREATE OR REPLACE stage STAR_WARS_DB.SW_DATA.MY_STAGE;
+ 
  -- Table to store Star Wars survey data 
 CREATE OR REPLACE TABLE STAR_WARS_DB.SW_DATA.Star_wars_survey (
 RespondentID varchar(1000),
@@ -341,9 +351,10 @@ Age varchar(1000),
 Education varchar(1000)
 );
 ```
+## Execute these statements in Terminal
 
-You need to replace <account_name> with the name of your Snowflake account 
-
+Note: 
+You need to replace <account_name> with the name of your Snowflake account.
 You would need to replace <path_to_local_file> with the actual path to the star_wars_characters.csv file on your local machine
 
 ``` terminal
@@ -365,10 +376,10 @@ FROM @MY_STAGE/star_wars_survey.csv
 FILE_FORMAT = (TYPE = CSV, FIELD_DELIMITER = ',',SKIP_HEADER = 1)
 ON_ERROR = 'CONTINUE';
 
- 
+
+--Execute the below query and add it to the dashboard 
 --This query calculates the number of "very favorable" ratings for each Star Wars character based on responses from a survey.
--- Represented as bar chart in dashboard
---Title: Most Favorite Character
+-- Create it as bar chart in dashboard and give it a title as  "Most Favorite Character"
 
 SELECT 
   character_name, 
@@ -387,6 +398,7 @@ FROM (
 ) AS character_ratings
 WHERE rating IS NOT NULL
 GROUP BY character_name;
+
  ```
  ### Code Cleanup
  
