@@ -8,9 +8,8 @@ CREATE or replace WAREHOUSE LIGHTSPEED_WH;
 CREATE or replace ROLE JEDI;
 
 GRANT ROLE JEDI TO ROLE ACCOUNTADMIN;
--- Granting jedi role permission to use LIGHTSPEED_WH warehouse 
+-- Granting jedi role permission to use  warehouse and to create database
 GRANT USAGE ON WAREHOUSE LIGHTSPEED_WH TO ROLE JEDI;
--- Grant CREATE DATABASE privilege to jedi role
 GRANT CREATE DATABASE ON ACCOUNT TO ROLE JEDI;
 
 --switch the role to JEDI and create the database and schema
@@ -39,7 +38,6 @@ homeworld varchar(1000),
 species varchar(10000)
 );
 
-
 -- Table to store movie ratings information
 CREATE OR REPLACE TABLE STAR_WARS_DB.SW_DATA.MOVIE_RATING (
 Year INT,
@@ -56,7 +54,7 @@ RottenTomatoScore DECIMAL(3,2),
 Globalboxoffice_revenue number
 );
  ```
-Download the csv files and Load the data through snowsight by selecting the table and clicking on load data
+Download the csv files from [here](star_wars_datasets/)and Load the data through snowsight by selecting the table and clicking on load data
  ```sql
 
 -- Verify if the CHARACTERS table was loaded successfully
@@ -68,6 +66,7 @@ SELECT * FROM STAR_WARS_DB.SW_DATA.MOVIE_RATING;
  ```
  ### Create custom filters using the below queries using the role JEDI
  These filters will be used in the Snowsight dashboard queries so make sure to name SQL Keyword correctly
+ 
  ```sql
  
   --homeworld filter
@@ -83,7 +82,7 @@ select distinct title from STAR_WARS_DB.SW_DATA.movie_rating;
   ```
  
  
- ### Queries  used to build the Snowsight dashboard 
+ ### Queries to build the Snowsight dashboard 
 Query 1: This query returns the total count of characters in the characters table.
    ```sql
 ---Represented as First scorecard in dashboard
