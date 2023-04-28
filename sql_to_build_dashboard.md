@@ -2,7 +2,7 @@
 Copy these SQL statements into a Snowflake Worksheet, select all and execute them 
 
 ``` sql
--- Create the Snowflake virtual warehouse, Custom role,  ,database and schema 
+-- Create the Snowflake virtual warehouse, Custom role, database and schema 
 USE ROLE ACCOUNTADMIN;
 CREATE or replace WAREHOUSE LIGHTSPEED_WH;
 CREATE or replace ROLE JEDI;
