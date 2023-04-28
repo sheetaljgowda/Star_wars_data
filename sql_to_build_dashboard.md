@@ -141,7 +141,7 @@ WITH CTE AS (
         max(METASCORE) AS HIGHEST_METASCORE,
         COUNT(DIRECTOR) as total_movies_directed
     FROM
-        MOVIE_RATING
+        STAR_WARS_DB.SW_DATA.MOVIE_RATING
     GROUP BY
         DIRECTOR
 )
@@ -151,7 +151,7 @@ SELECT
     HIGHEST_METASCORE,
     total_movies_directed
 FROM
-    MOVIE_RATING M
+    STAR_WARS_DB.SW_DATA.MOVIE_RATING M
     LEFT JOIN CTE C ON M.DIRECTOR = C.DIRECTOR;
    ```
    
