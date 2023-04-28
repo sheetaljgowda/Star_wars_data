@@ -54,7 +54,7 @@ RottenTomatoScore DECIMAL(3,2),
 Globalboxoffice_revenue number
 );
  ```
-Download the csv files from [here](star_wars_datasets/)and Load the data through snowsight by selecting the table and clicking on load data
+Download the csv files from [here] (star_wars_datasets/)and Load the data through snowsight by selecting the table and clicking on load data
  ```sql
 
 -- Verify if the CHARACTERS table was loaded successfully
