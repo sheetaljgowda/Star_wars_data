@@ -73,9 +73,15 @@ SELECT * FROM STAR_WARS_DB.SW_DATA.MOVIE_RATING;
   --homeworld filter
 --SQL Keyword : homeworld  
 select distinct homeworld from STAR_WARS_DB.SW_DATA.CHARACTERS;
+ ```
+ 
+ ```sql
 --species filter
 --SQL Keyword : species 
 select distinct species from STAR_WARS_DB.SW_DATA.CHARACTERS;
+ ```
+ 
+  ```sql
 --movie_title filter
 --SQL Keyword : title 
 select distinct title from STAR_WARS_DB.SW_DATA.movie_rating;
@@ -84,7 +90,8 @@ select distinct title from STAR_WARS_DB.SW_DATA.movie_rating;
  
  
  ### Queries to build the Snowsight dashboard 
- Note: Make sure to select warehouse LIGHTSPEED_WH and ROLE JEDI before executing the below queries.
+Note: Make sure to select warehouse LIGHTSPEED_WH and ROLE JEDI before executing the below queries.
+ 
 Query 1: This query returns the total count of characters in the characters table.
    ```sql
 ---Represented as First scorecard in dashboard
