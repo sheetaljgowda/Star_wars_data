@@ -187,7 +187,7 @@ SELECT
   species, 
   ROUND(AVG(mass),2) AS avg_mass,
   ROUND(AVG(HEIGHT),2) AS avg_height
-FROM characters where species<>'NA'
+FROM  STAR_WARS_DB.SW_DATA.characters where species<>'NA'
 GROUP BY species 
 order by avg_height desc;
 
