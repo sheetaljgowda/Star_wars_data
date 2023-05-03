@@ -5,15 +5,6 @@ Copy these SQL statements into a Snowflake Worksheet, select all and execute the
 -- Create the Snowflake virtual warehouse, Custom role, database and schema 
 USE ROLE ACCOUNTADMIN;
 CREATE or replace WAREHOUSE LIGHTSPEED_WH;
-CREATE or replace ROLE JEDI;
-
-GRANT ROLE JEDI TO ROLE ACCOUNTADMIN;
--- Granting jedi role permission to use  warehouse and to create database
-GRANT USAGE ON WAREHOUSE LIGHTSPEED_WH TO ROLE JEDI;
-GRANT CREATE DATABASE ON ACCOUNT TO ROLE JEDI;
-
---switch the role to JEDI and create the database and schema
-USE ROLE JEDI;
 CREATE OR REPLACE DATABASE STAR_WARS_DB;
 CREATE OR REPLACE SCHEMA SW_DATA;
 ```
@@ -22,7 +13,6 @@ CREATE OR REPLACE SCHEMA SW_DATA;
  
  ```sql
 -- Create two tables 
-USE ROLE JEDI;
 -- Table to store Star Wars character information
 CREATE OR REPLACE TABLE STAR_WARS_DB.SW_DATA.CHARACTERS
 (
@@ -65,7 +55,7 @@ SELECT * FROM STAR_WARS_DB.SW_DATA.CHARACTERS;
 SELECT * FROM STAR_WARS_DB.SW_DATA.MOVIE_RATING;
 
  ```
- ### Create custom filters using the below queries using the role JEDI
+ ### Create custom filters using the below queries 
  These filters will be used in the Snowsight dashboard queries so make sure to name SQL Keyword correctly
  
  ```sql
@@ -203,8 +193,6 @@ Copy these SQL statements into a Snowflake Worksheet and execute them one by one
 
 ```sql
 
-USE ROLE JEDI;
-
  -- Table to store Star Wars survey data 
 CREATE OR REPLACE TABLE STAR_WARS_DB.SW_DATA.Star_wars_survey (
 RespondentID varchar(1000),
@@ -270,10 +258,8 @@ GROUP BY character_name;
  ### Code Cleanup
  
 ``` sql
- USE ROLE JEDI;
- DROP DATABASE STAR_WARS_DB;
- 
  USE ROLE ACCOUNTADMIN;
+ DROP DATABASE STAR_WARS_DB;
  DROP WAREHOUSE LIGHTSPEED_WH;
- DROP ROLE JEDI;
+
 ``` 
