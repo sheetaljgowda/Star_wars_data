@@ -164,7 +164,7 @@ select name,homeworld,species from STAR_WARS_DB.SW_DATA.characters  where specie
   ```sql
 --- Represented as stacked bar chart on dashboard
 -- Title: Star Wars Characters by Species and Home Planet
-select count(name),homeworld,species from STAR_WARS_DB.SW_DATA.characters where species=:species and homeworld=:homeworld
+select count(*) as total,homeworld,species from STAR_WARS_DB.SW_DATA.characters where species=:species and homeworld=:homeworld
 and species<>'NA' and homeworld<>'NA'
 group by homeworld,species;
  ```
