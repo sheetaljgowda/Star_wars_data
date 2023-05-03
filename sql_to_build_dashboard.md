@@ -86,7 +86,7 @@ Query 1: This query returns the total count of characters in the characters tabl
    ```sql
 ---Represented as First scorecard in dashboard
 --- Title: Total Characters in Dataset
-select count(name) from STAR_WARS_DB.SW_DATA.characters;
+select count(name) AS Total from STAR_WARS_DB.SW_DATA.characters;
   ```
 Query 2: This query calculates the average global box office revenue for all Star Wars movies.
   ```sql
