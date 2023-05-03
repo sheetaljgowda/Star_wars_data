@@ -80,7 +80,7 @@ select distinct title from STAR_WARS_DB.SW_DATA.movie_rating;
  
  
  ### Queries to build the Snowsight dashboard 
-Note: Make sure to select warehouse LIGHTSPEED_WH and ROLE JEDI before executing the below queries.
+Note: Make sure to select warehouse LIGHTSPEED_WH and ROLE ACCOUNTADMIN before executing the below queries.
  
 Query 1: This query returns the total count of characters in the characters table.
    ```sql
