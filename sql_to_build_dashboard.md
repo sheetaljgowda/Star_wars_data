@@ -2,7 +2,7 @@
 Copy these SQL statements into a Snowflake Worksheet, select all and execute them 
 
 ``` sql
--- Create the Snowflake virtual warehouse, Custom role, database and schema 
+-- Create the database and schema 
 --Note: For the sake of simplicity, the ACCOUNTADMIN role was used to create the database and schemas,
 --although it is worth noting that typically the SYSADMIN role would be responsible for this task.
 
