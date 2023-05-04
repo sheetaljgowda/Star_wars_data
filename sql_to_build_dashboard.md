@@ -45,6 +45,7 @@ Globalboxoffice_revenue number
 );
  ```
 Download the csv files from [here](star_wars_datasets/) and Load the data through snowsight by selecting the table and clicking on load data and selecting the file format
+
 Note: Select the file format as CSV and don't forget to skip one line of the header
 
  ```sql
