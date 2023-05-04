@@ -4,7 +4,11 @@ Copy these SQL statements into a Snowflake Worksheet, select all and execute the
 ``` sql
 -- Create the Snowflake virtual warehouse, Custom role, database and schema 
 USE ROLE ACCOUNTADMIN;
-CREATE or replace WAREHOUSE LIGHTSPEED_WH;
+
+CREATE or replace WAREHOUSE LIGHTSPEED_WH WITH WAREHOUSE_SIZE=SMALL 
+AUTO_SUSPEND=300 AUTO_RESUME=TRUE INITIALLY_SUSPENDED=TRUE;
+
+USE ROLE SYSADMIN;
 CREATE OR REPLACE DATABASE STAR_WARS_DB;
 CREATE OR REPLACE SCHEMA SW_DATA;
 ```
