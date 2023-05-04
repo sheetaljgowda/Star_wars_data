@@ -3,9 +3,10 @@ Copy these SQL statements into a Snowflake Worksheet, select all and execute the
 
 ``` sql
 -- Create the Snowflake virtual warehouse, Custom role, database and schema 
-USE ROLE ACCOUNTADMIN;
-Note: For the sake of simplicity, the ACCOUNTADMIN role was used to create the database and schemas, although it is worth noting that typically the sysadmin role would be responsible for this task.
+--Note: For the sake of simplicity, the ACCOUNTADMIN role was used to create the database and schemas,
+although it is worth noting that typically the SYSADMIN role would be responsible for this task.
 
+USE ROLE ACCOUNTADMIN;
 CREATE OR REPLACE DATABASE STAR_WARS_DB;
 CREATE OR REPLACE SCHEMA SW_DATA;
 ```
