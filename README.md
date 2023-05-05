@@ -15,7 +15,7 @@ Before you begin, you'll need to have the following:
 The data used to create this dashboard was sourced from kaggle and data.world
 
 
-Dashboard Screenshot
+### Dashboard Screenshot
 This is a screenshot of the final dashboard in Snowsight:
 
 ![Screenshot](screenshot_1.png)
