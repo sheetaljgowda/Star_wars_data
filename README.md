@@ -14,9 +14,9 @@ Before you begin, you'll need to have the following:
 ### Data sources
 The data used to create this dashboard was sourced from kaggle and data.world
 
-### Optional
-To install SnowSQL on your machine. 
-You can download it from the [Snowflake website](https://developers.snowflake.com/snowsql/).
+
+Dashboard Screenshot
+This is a screenshot of the final dashboard in Snowsight:
 
 ![Screenshot](screenshot_1.png)
 
