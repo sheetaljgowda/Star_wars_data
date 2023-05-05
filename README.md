@@ -18,6 +18,8 @@ The data used to create this dashboard was sourced from kaggle and data.world
 To install SnowSQL on your machine. 
 You can download it from the [Snowflake website](https://developers.snowflake.com/snowsql/).
 
+![Screenshot](screenshot_1.png)
+
 
 
 
