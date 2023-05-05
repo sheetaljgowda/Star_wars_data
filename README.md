@@ -17,6 +17,10 @@ The data used to create this dashboard was sourced from kaggle and data.world
 
 ### Dashboard Screenshot
 
+All the data required to build the dashboard is present [here](star_wars_datasets/) 
+The code used to build the snowsight dashboard is present in the mark down file [here](sql_to_build_dashboard.md)
+
+
 
 ![Screenshot](screenshot_1.png)
 
