@@ -60,6 +60,8 @@ SELECT * FROM STAR_WARS_DB.SW_DATA.MOVIE_RATING;
 
  ```
  ### Create custom filters using the below queries 
+ In worksheet go to manage filters and click on add filter. Enter the display name and make sure to enter the same sql keyword as mentioned below.
+ Select the role as ACCOUNTADMIN and warehouse as COMPUTE_WH and Option via Query( copy paste the below mentioned query within it and create 3 different filters)
  These filters will be used in the Snowsight dashboard queries so make sure to name SQL Keyword correctly
  
  ```sql
