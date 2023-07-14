@@ -239,6 +239,7 @@ Education varchar(1000)
 --Load the csv file by selecting the table and file format through Snowsight 
 --Note: Select the file format as CSV and don't forget to skip one line of the header
 
+SELECT * FROM STAR_WARS_DB.SW_DATA.Star_wars_survey;
 
 SELECT 
   character_name, 
@@ -257,6 +258,8 @@ FROM (
 ) AS character_ratings
 WHERE rating IS NOT NULL
 GROUP BY character_name;
+
+
 
  ```
  ### Code Cleanup 
